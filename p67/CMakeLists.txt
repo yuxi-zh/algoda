@@ -1,0 +1,1 @@
+add_executable(P67-EX ex.cpp)
