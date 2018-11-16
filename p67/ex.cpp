@@ -51,7 +51,7 @@ struct List
         Val[Size] = Value;
 
         int I = Head, J = -1;
-        while (Value > Val[I])
+        while (I != -1 && Value > Val[I])
         {
             J = I;
             I = Ptr[I];
@@ -148,9 +148,8 @@ struct List
     }
 };
 
-double Timing(function<void(void)> target)
+double Timing(function<void(void)> target, int Repeat)
 {
-    const int Repeat = 100;
     auto Begin = high_resolution_clock::now();
     for (int I = 0; I < Repeat; I++)
     {
@@ -162,7 +161,7 @@ double Timing(function<void(void)> target)
 
 int main(int argc, char const *argv[])
 {
-    for (int N = 10; N < 1e10; N *= 10)
+    for (int N = 10; N < 1e6; N *= 10)
     {
         List TestList(N);
         TestList.Fullfill();
@@ -172,10 +171,12 @@ int main(int argc, char const *argv[])
 
         int X = Uniform(Generator);
 
-        cout << Timing([&]() { TestList.A(X); }) << ",";
-        cout << Timing([&]() { TestList.B(X); }) << ",";
-        cout << Timing([&]() { TestList.C(X); }) << ",";
-        cout << Timing([&]() { TestList.D(X); }) << endl;
+		int M = min(1000000 / N, 100);
+
+        cout << Timing([&]() { TestList.A(X); }, M) << ",";
+        cout << Timing([&]() { TestList.B(X); }, M) << ",";
+        cout << Timing([&]() { TestList.C(X); }, M) << ",";
+        cout << Timing([&]() { TestList.D(X); }, M) << endl;
     }
     return 0;
 }
