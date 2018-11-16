@@ -109,8 +109,22 @@ struct List
         default_random_engine Generator;
         uniform_int_distribution<int> Uniform(0, Size - 1);
 
+        int I = Head;
+        int Max = numeric_limits<int>::min();
         int Cnt = (int)ceil(sqrt(Size));
-		return 0;
+
+        for (int J = 0; J < Cnt; J++)
+        {
+            int K = Uniform(Generator);
+            int Y = Val[K];
+            if (Y > Max && Y <= X)
+            {
+                I = K;
+                Max = Y;
+            }
+        }
+
+        return Search(X, I);
     }
 
     int D(int X)
