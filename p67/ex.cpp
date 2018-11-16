@@ -110,6 +110,7 @@ struct List
         uniform_int_distribution<int> Uniform(0, Size - 1);
 
         int Cnt = (int)ceil(sqrt(Size));
+		return 0;
     }
 
     int D(int X)

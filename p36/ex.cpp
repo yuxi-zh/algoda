@@ -1,6 +1,7 @@
+#define _USE_MATH_DEFINES
+#include <cmath>
 #include <unordered_set>
 #include <random>
-#include <cmath>
 #include <iostream>
 #include <chrono>
 #include <set>
